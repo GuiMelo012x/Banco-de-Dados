@@ -1,0 +1,37 @@
+CHAR E VARCHAR
+
+Dados CHAR(10) e VARCHAR(10), se voce escrever "JOAO":
+
+CHAR - J O A O _ _ _ _ _ _ - ocupa 10 bytes.
+VARCHAR - J O A O  		   - ocupa 4 bytes.
+
+Utilizamos VARCHAR sempre que for algo variável.
+	Ex: Nome.
+		Endereço.
+		Email.
+Utilizamos CHAR sempre que for algo que não muda, que não vai variar nunca.
+	Ex: Sexo (M ou F).
+		Siglas de unidades federativas, pois sabemos que serão sempre 2 (PE,SP,BA,RS).
+		Verdadeiro ou falso (1 ou 0, V ou F).
+
+
+
+ENUM e Numéricos
+
+Utilizamos ENUM quando queremos limitar os dados em uma coluna.
+ENUM existe apenas no MySQL. Em outros bancos utilizam-se Constraints.
+
+Tipos Numéricos
+	int 	
+		Aceita apenas números inteiros.
+		Aceita no máximo 11 dígitos.
+		Números que não vão ser usados para cálculo são tipados como VARCHAR.
+		Números que serão utilizados em cálculo são tipados como int ou float.
+	float(total,virgula) 
+		float(10,2) - 10 casas no total, 2 delas após a vírgula.
+			12345678,99
+		float(7,3) - 7 casas no total, 3 delas depois da vírgula.
+			1234,567
+		Quanto mais casas decimais, maior a precisão.
+		1345,8989 -> menor precisão.
+		134589,89 -> maior precisão.

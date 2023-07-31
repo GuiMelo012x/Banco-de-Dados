@@ -1,0 +1,113 @@
+
+   /*1- Traga os funcionarios que trabalhem no departamento de filmes ou no dept de roupas*/
+		
+		SELECT nome,departamento,cargo from funcionarios where departamento = 'roupas' or departamento = 'filmes';
+			ROUPAS - 53 - Vai primeiro. (OR)
+			FILMES - 21 - Vai depois. 
+
+   /*2- O gestor de marketing pediu a lista das funcionarias que trabalhem no departamento de filmes 
+ou no dept lar. Ele necessita enviar um email para as colaboradoras desses dois setores.*/
+		SELECT nome,departamento,email from funcionarios where sexo = 'Feminino' and where departamento = 'filmes' or departamento = 'lar'; - ERRADO - não se repete o "where".
+			SELECT nome,departamento,email from funcionarios where sexo = 'Feminino' and departamento = 'lar' or departamento = 'filmes'; - ERRADO - com AND se utiliza o menor primeiro.
+					FILMES tem 21 trabalhadores - Vem primeiro.(AND)
+					LAR tem 52 trabalhadores - Vem primeiro.
+					
+		SELECT count(*),sexo from funcionarios group by sexo;
+		/*| count(*) | sexo      |
+			+----------+-----------+
+			|      491 | Feminino  |
+			|      484 | Masculino |
+			+----------+-----------+*/
+		SELECT count(*),sexo from funcionarios group by departamento;
+			Lar tem 52 e filmes 21
+	
+		SELECT * from funcionarios 
+		where
+		(departamento = 'lar' and sexo = 'feminino')
+		or
+		(departamento = 'filmes' and sexo = 'feminino'); - CORRETO
+		SELECT * from funcionarios where sexo = 'Feminino' and departamento = 'lar' or sexo = 'feminino' and departamento = 'filmes'; - CORRETO
+		
+		
+	OR = MAIOR VAI NA FRENTE.
+	AND = MAIOR VAI NA FRENTE.
+		
+   /*3- Traga os funcionarios do sexo masculino ou os funcionarios que trabalhem no setor Jardim.*/ 
+		SELECT nome,departamento,sexo from funcionarios where sexo = 'masculino' or sexo = 'feminino' and departamento = 'jardim'; - MEIO CERTO
+		SELECT nome,departamento,sexo from funcionarios where sexo = 'masculino' or departamento = 'jardim'; - CORRETO
+			sexo = 'masculino' vem primeiro que departamento = 'jardim' pois tem muito mais masculino do que jardim.
+
+create database exercicio;
+use exercicio;
+
+create table funcionarios
+  (
+      idFuncionario integer,
+      nome varchar(100),
+      email varchar(200),
+      sexo varchar(10),
+      departamento varchar(100),
+      admissao varchar(10),
+      salario integer,
+      cargo varchar(100),
+      idRegiao int
+  );
+
+		| departamento  | Numero de Trabalhadores |
+		+---------------+-------------------------+
+		| Alimentícios  |                      46 |
+		| Automotivo    |                      46 |
+		| Bebês         |                      45 |
+		| Beleza        |                      53 |
+		| Books         |                      47 |
+		| Brinquedos    |                      41 |
+		| Calçados      |                      43 |
+		| Computadores  |                      52 |
+		| Crianças      |                      38 |
+		| Eletronicos   |                      49 |
+		| Esporte       |                      40 |
+		| Ferramentas   |                      39 |
+		| Filmes        |                      21 |
+		| Games         |                      49 |
+		| Industrial    |                      47 |
+		| Jardim        |                      47 |
+		| Joalheria     |                      36 |
+		| Lar           |                      52 |
+		| Música        |                      37 |
+		| Outdoors      |                      48 |
+		| Roupas        |                      53 |
+		| Saúde         |                      46 |
+		+---------------+-------------------------+
+  
+  /* PARA DEIXAR EM ORDEM: */
+		SELECT COUNT(*),departamento from funcionarios group by departamento order by 1;
+
+	+-------------------------+---------------+
+		| Numero de Trabalhadores | departamento  |
+		+-------------------------+---------------+
+		|                      21 | Filmes        |
+		|                      36 | Joalheria     |
+		|                      37 | Música        |
+		|                      38 | Crianças      |
+		|                      39 | Ferramentas   |
+		|                      40 | Esporte       |
+		|                      41 | Brinquedos    |
+		|                      43 | Calçados      |
+		|                      45 | Bebês         |
+		|                      46 | Alimentícios  |
+		|                      46 | Automotivo    |
+		|                      46 | Saúde         |
+		|                      47 | Books         |
+		|                      47 | Industrial    |
+		|                      47 | Jardim        |
+		|                      48 | Outdoors      |
+		|                      49 | Eletronicos   |
+		|                      49 | Games         |
+		|                      52 | Lar           |
+		|                      52 | Computadores  |
+		|                      53 | Beleza        |
+		|                      53 | Roupas        |
+		+-------------------------+---------------+
+		
+		   /*3- Traga os funcionarios do sexo masculino ou os funcionarios que trabalhem no setor Jardim.*/ 
+				SELECT nome,sexo,departamento from funcionarios where sexo = 'masculino' or departamento = 'jardim';
